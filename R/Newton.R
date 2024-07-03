@@ -79,8 +79,8 @@ Newton_result <- function(T_dt){
 }
 
 #' @import data.table
-#' @exportS3Method
-Newton_result.default <- function(T_dt){
+#' @export
+Newton_result.data.table <- function(T_dt){
   theta_0 <- mle_theta_full_sample(T_dt[, .N], T_dt[, get(names(T_dt)[1])])
   lambda_0 <- mle_lambda_full_sample(T_dt[, .N], T_dt[, get(names(T_dt)[1])], theta_0)
   T_v <- T_dt[, get(names(T_dt)[1])]
