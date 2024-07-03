@@ -7,14 +7,7 @@ globalVariables(c("sort_Y_val", "delta", "."))
 #' @param n integer, number of observations in data
 #'
 #' @keywords internal
-KS_test_full <- function(X_vec, theta_hat, lambda_hat, n) {
-  UseMethod("KS_test_full")
-}
-
-#' @import data.table
-#'
-#' @keywords internal
-KS_test_full.default <- function(X_vec, theta_hat, lambda_hat, n){
+KS_test_full <- function(X_vec, theta_hat, lambda_hat, n){
   U <- 1 - exp( -exp(theta_hat * (log(X_vec) - log(lambda_hat))))
   U_sort <- sort(U)
   expr1 <- max(1:n / n - U_sort)
@@ -32,14 +25,7 @@ KS_test_full.default <- function(X_vec, theta_hat, lambda_hat, n){
 #'
 #' @keywords internal
 #' @keywords internal
-CM_test_full <- function(X_vec, theta_hat, lambda_hat, n) {
-  UseMethod("CM_test_full")
-}
-
-#' @import data.table
-#'
-#' @keywords internal
-CM_test_full.default <- function(X_vec, theta_hat, lambda_hat, n){
+CM_test_full<- function(X_vec, theta_hat, lambda_hat, n){
   U <- 1 - exp( -exp(theta_hat * (log(X_vec) - log(lambda_hat))))
   U_sort <- sort(U)
 
@@ -51,17 +37,10 @@ CM_test_full.default <- function(X_vec, theta_hat, lambda_hat, n){
 #' @param X_vec numeric, the values from uncensured sample
 #' @param n integer, number of observations in data
 #'
-#' @keywords internal
-#' @keywords internal
-LS_test_full <- function(X_vec, n) {
-  UseMethod("LS_test_full")
-}
-
-#' @import data.table
 #' @importFrom EWGoF LSEst
 #'
 #' @keywords internal
-LS_test_full.default <- function(X_vec, n){
+LS_test_full <- function(X_vec, n){
   lambda_hat_LS <- EWGoF::LSEst(X_vec)$eta
   theta_hat_LS <- EWGoF::LSEst(X_vec)$beta
 
@@ -80,15 +59,10 @@ LS_test_full.default <- function(X_vec, n){
 #' information of observation's censoring
 #' @param n integer, number of observations in data
 #'
-#' @keywords internal
-KS_test <- function(Y_vec_dt, n) {
-  UseMethod("KS_test")
-}
-
 #' @import data.table
 #'
 #' @keywords internal
-KS_test.default <- function(Y_vec_dt, n){
+KS_test<- function(Y_vec_dt, n){
   sort_Y_vec_dt <- sort_Y_vals(Y_vec_dt)
   sort_Y_values <- sort_Y_vec_dt[delta == 1, sort_Y_val]
   Est_KM_sort_Y <- sapply(sort_Y_values, function(t) Est_kaplan_meier(t, n, sort_Y_vec_dt))
@@ -106,16 +80,9 @@ KS_test.default <- function(Y_vec_dt, n){
 #' information of observation's censoring
 #' @param n integer, number of observations in data
 #'
-#' @keywords internal
-#' @keywords internal
-CM_test <- function(Y_vec_dt, n) {
-  UseMethod("CM_test")
-}
-
 #' @import data.table
-#'
 #' @keywords internal
-CM_test.default <- function(Y_vec_dt, n){
+CM_test <- function(Y_vec_dt, n){
   sort_Y_vec_dt <- sort_Y_vals(Y_vec_dt)
   sort_Y_values <- sort_Y_vec_dt[, sort_Y_val]
   num_uncens <- sort_Y_vec_dt[, which(delta == 1)]
@@ -137,16 +104,9 @@ CM_test.default <- function(Y_vec_dt, n){
 #' information of observation's censoring
 #' @param n integer, number of observations in data
 #'
-#' @keywords internal
-#' @keywords internal
-LS_test <- function(Y_vec_dt, n) {
-  UseMethod("LS_test")
-}
-
 #' @import data.table
-#'
 #' @keywords internal
-LS_test.default <- function(Y_vec_dt, n){
+LS_test <- function(Y_vec_dt, n){
   sort_Y_vec_dt <- sort_Y_vals(Y_vec_dt)
   sort_Y_values <- sort_Y_vec_dt[, sort_Y_val]
   Est_KM_Y <- sapply(sort_Y_values, function(t) Est_kaplan_meier(t, n, sort_Y_vec_dt))

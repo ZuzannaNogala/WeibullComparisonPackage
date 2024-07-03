@@ -5,15 +5,10 @@
 #' @param sort_Y_vec_dt a data table which contains value of sorted statistic Y and
 #' information of observation's censoring
 #'
-#' @keywords internal
-Delta_k <- function(k, n, sort_Y_vec_dt) {
-  UseMethod("Delta_k")
-}
-
 #' @import data.table
 #'
 #' @keywords internal
-Delta_k.default <- function(k, n, sort_Y_vec_dt){
+Delta_k <- function(k, n, sort_Y_vec_dt){
   delta_vec <- sort_Y_vec_dt[, delta]
   if(k == 1) delta_vec[1] / n
   if(k == n) prod(((n - 1 : (n - 1)) / (n - 1 : (n - 1) + 1)) ^ delta_vec[1 : (n - 1)])
@@ -27,16 +22,10 @@ Delta_k.default <- function(k, n, sort_Y_vec_dt){
 #' @param Y_vec_dt a data table which contains value of transformed statistic T (Y) and
 #' information of observation's censoring
 #'
+#'
 #' @rdname newStatistics
 #' @keywords internal
-S_n_1 <- function(a, n, Y_vec_dt) {
-  UseMethod("S_n_1")
-}
-
-#' @import data.table
-#'
-#' @keywords internal
-S_n_1.default <- function(a, n, Y_vec_dt){
+S_n_1 <- function(a, n, Y_vec_dt){
   Y_val <- sort(Y_vec_dt[, Y_val])
 
   Delta <- sapply(1:n, function(k) Delta_k(k, n, sort_Y_vals(Y_vec_dt)))
@@ -54,15 +43,9 @@ S_n_1.default <- function(a, n, Y_vec_dt){
 }
 
 #' @rdname newStatistics
-#' @keywords internal
-S_n_2 <- function(a, n, Y_vec_dt) {
-  UseMethod("S_n_2")
-}
-
-#' @import data.table
 #'
 #' @keywords internal
-S_n_2.default <- function(a, n, Y_dt){
+S_n_2 <- function(a, n, Y_dt){
   Y_val <- sort(Y_dt[, Y_val])
 
   Delta <- sapply(1:n, function(k) Delta_k(k, n, sort_Y_vals(Y_dt)))

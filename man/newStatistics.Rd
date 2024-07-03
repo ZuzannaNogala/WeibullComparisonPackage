@@ -7,7 +7,7 @@
 \usage{
 S_n_1(a, n, Y_vec_dt)
 
-S_n_2(a, n, Y_vec_dt)
+S_n_2(a, n, Y_dt)
 }
 \arguments{
 \item{a}{numeric, the value of statistic's parameter}

@@ -9,12 +9,7 @@ globalVariables(c("Y_val"))
 #'
 #' @rdname deritatives
 #' @keywords internal
-first_deritative_theta_k <- function(T_k, delta, theta_k, lambda_k) {
-  UseMethod("first_deritative_theta_k")
-}
-
-#' @keywords internal
-first_deritative_theta_k.numeric <- function(T_k, delta, theta_k, lambda_k){
+first_deritative_theta_k<- function(T_k, delta, theta_k, lambda_k){
   d_k <- sum(delta)
 
   d_k * 1 / theta_k - d_k * log(lambda_k) +
@@ -25,14 +20,7 @@ first_deritative_theta_k.numeric <- function(T_k, delta, theta_k, lambda_k){
 
 #' @rdname deritatives
 #' @keywords internal
-first_deritative_lambda_k <- function(T_k, delta, theta_k, lambda_k) {
-  UseMethod("first_deritative_lambda_k")
-}
-
-#' @import data.table
-#'
-#' @keywords internal
-first_deritative_lambda_k.numeric <- function(T_k, delta, theta_k, lambda_k){
+first_deritative_lambda_k <- function(T_k, delta, theta_k, lambda_k){
   d_k <- sum(delta)
 
   - d_k * theta_k / lambda_k + theta_k * lambda_k ^ (-theta_k - 1) * sum(T_k ^ theta_k)
@@ -40,14 +28,7 @@ first_deritative_lambda_k.numeric <- function(T_k, delta, theta_k, lambda_k){
 
 #' @rdname deritatives
 #' @keywords internal
-second_deritative_theta_k <- function(T_k, delta, theta_k, lambda_k) {
-  UseMethod("second_deritative_theta_k")
-}
-
-#' @import data.table
-#'
-#' @keywords internal
-second_deritative_theta_k.numeric <- function(T_k, delta, theta_k, lambda_k){
+second_deritative_theta_k <- function(T_k, delta, theta_k, lambda_k){
   d_k <- sum(delta)
 
   - d_k / theta_k ^ 2 -
@@ -58,14 +39,7 @@ second_deritative_theta_k.numeric <- function(T_k, delta, theta_k, lambda_k){
 
 #' @rdname deritatives
 #' @keywords internal
-second_deritative_lambda_k <- function(T_k, delta, theta_k, lambda_k) {
-  UseMethod("second_deritative_lambda_k")
-}
-
-#' @import data.table
-#'
-#' @keywords internal
-second_deritative_lambda_k.numeric <- function(T_k, delta, theta_k, lambda_k){
+second_deritative_lambda_k <- function(T_k, delta, theta_k, lambda_k){
   d_k <- sum(delta)
 
   d_k * theta_k / lambda_k ^ 2 - theta_k * (theta_k + 1) * lambda_k ^ (-theta_k - 2) * sum(T_k ^ theta_k)
@@ -73,14 +47,7 @@ second_deritative_lambda_k.numeric <- function(T_k, delta, theta_k, lambda_k){
 
 #' @rdname deritatives
 #' @keywords internal
-mix_deritative_k <- function(T_k, delta, theta_k, lambda_k) {
-  UseMethod("mix_deritative_k")
-}
-
-#' @import data.table
-#'
-#' @keywords internal
-mix_deritative_k.numeric <- function(T_k, delta, theta_k, lambda_k){
+mix_deritative_k<- function(T_k, delta, theta_k, lambda_k){
   d_k <- sum(delta)
 
   -d_k / lambda_k +
@@ -91,14 +58,7 @@ mix_deritative_k.numeric <- function(T_k, delta, theta_k, lambda_k){
 
 #' @rdname deritatives
 #' @keywords internal
-grad_k <- function(T_k, delta, theta_k, lambda_k) {
-  UseMethod("grad_k")
-}
-
-#' @import data.table
-#'
-#' @keywords internal
-grad_k.numeric <- function(T_k, delta, theta_k, lambda_k){
+grad_k <- function(T_k, delta, theta_k, lambda_k){
   dx_theta_k <- first_deritative_theta_k(T_k, delta, theta_k, lambda_k)
   dx_lambda_k <- first_deritative_lambda_k(T_k, delta, theta_k, lambda_k)
 
@@ -107,14 +67,7 @@ grad_k.numeric <- function(T_k, delta, theta_k, lambda_k){
 
 #' @rdname deritatives
 #' @keywords internal
-Hessian_k <- function(T_k, delta, theta_k, lambda_k) {
-  UseMethod("Hessian_k")
-}
-
-#' @import data.table
-#'
-#' @keywords internal
-Hessian_k.numeric <- function(T_k, delta, theta_k, lambda_k){
+Hessian_k<- function(T_k, delta, theta_k, lambda_k){
   H_k <- matrix(0, ncol = 2, nrow = 2)
   H_k[1,1] <- second_deritative_theta_k(T_k, delta, theta_k, lambda_k)
   H_k[2,2] <- second_deritative_lambda_k(T_k, delta, theta_k, lambda_k)
