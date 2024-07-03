@@ -6,8 +6,8 @@
 \usage{
 Newton_result(
   T_dt,
-  theta_0 = mle_theta_full_sample(n, T_vals),
-  lambda_0 = mle_lambda_full_sample(n, T_vals, theta_0)
+  theta_0 = mle_theta_full_sample(n, T_dt[, get(names(T_dt)[1])]),
+  lambda_0 = mle_lambda_full_sample(n, T_dt[, get(names(T_dt)[1])], theta_0)
 )
 }
 \arguments{
