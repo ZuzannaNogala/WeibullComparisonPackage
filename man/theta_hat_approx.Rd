@@ -7,9 +7,9 @@
 theta_hat_approx(n, T_vals)
 }
 \arguments{
-\item{theta_before_k}{integer, number of observations in data}
+\item{n}{integer, number of observations in data}
 
-\item{lambda_before_k}{vector of observations}
+\item{T_vals}{vector of observations}
 }
 \description{
 Starting Points - theta

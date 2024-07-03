@@ -20,8 +20,8 @@ Newton_k_step.numeric <- function(theta_before_k, lambda_before_k, Hess_before_k
 
 #' Starting Points - theta
 #'
-#' @param theta_before_k integer, number of observations in data
-#' @param lambda_before_k vector of observations
+#' @param n integer, number of observations in data
+#' @param T_vals vector of observations
 #'
 #' @keywords internal
 theta_hat_approx <- function(n, T_vals) {
@@ -73,12 +73,12 @@ mle_lambda_full_sample.numeric <- function(n, T_vals, theta_hat_est = mle_theta_
 #' @param T_dt data table with one column with values of observation, second one contains information if the observation
 #' is censured or not
 #'
-#' @import data.table
 #' @export
 Newton_result <- function(T_dt){
-  UseMethod("Newton_result")
+  UseMethod("Newton_result", as.data.table(T_dt))
 }
 
+#' @import data.table
 #' @keywords internal
 Newton_result.data.table <- function(T_dt){
   theta_0 <- mle_theta_full_sample(T_dt[, .N], T_dt[, get(names(T_dt)[1])])
