@@ -1,3 +1,4 @@
+globalVariables(c("n", "T_vals"))
 #' Newton-Raphson Algorithm - k-th step of algorithm
 #'
 #' @param theta_before_k (k-1)-th estimatation of parameter theta (shape parameter)

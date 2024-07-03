@@ -1,3 +1,4 @@
+globalVariables(c("Y_val"))
 #' Deritatives used in Newton-Raphson Algorithm
 #'
 #' @param T_k numeric, k-th observation's value
@@ -17,7 +18,7 @@ first_deritative_theta_k.default <- function(T_k, delta, theta_k, lambda_k){
   d_k <- sum(delta)
 
   d_k * 1 / theta_k - d_k * log(lambda_k) +
-    sum(delta_k * log(T_k)) +
+    sum(delta * log(T_k)) +
     log(lambda_k) * lambda_k ^ (-theta_k) * sum(T_k ^ theta_k) -
     lambda_k ^ (-theta_k) * sum(log(T_k) * T_k ^ theta_k)
 }

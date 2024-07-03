@@ -1,3 +1,4 @@
+globalVariables(c("sort_Y_val", "delta", "."))
 #' Komogorov-Smirnov test - Full Sample Case
 #'
 #' @param X_vec numeric, the values from uncensured sample

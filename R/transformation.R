@@ -1,3 +1,4 @@
+globalVariables(c("T_val", "Y_val"))
 #' Transformed Data to variable from extreme value distribution
 #'
 #' @param T_vec_dt a data table which contains value of T statistic and information of observation's censoring
