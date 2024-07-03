@@ -1,4 +1,4 @@
-globalVariables(c("n", "T_vals"))
+globalVariables(c("T_vals"))
 #' Newton-Raphson Algorithm - k-th step of algorithm
 #'
 #' @param theta_before_k (k-1)-th estimatation of parameter theta (shape parameter)
@@ -13,24 +13,24 @@ Newton_k_step <- function(theta_before_k, lambda_before_k, Hess_before_k, grad_b
 
 #'
 #' @keywords internal
-Newton_k_step.default <- function(theta_before_k, lambda_before_k, Hess_before_k, grad_before_k){
+Newton_k_step.numeric <- function(theta_before_k, lambda_before_k, Hess_before_k, grad_before_k){
   x_before_k <- c(theta_before_k, lambda_before_k)
   x_before_k - as.vector(solve(Hess_before_k) %*% grad_before_k)
 }
 
 #' Starting Points - theta
 #'
-#' @param n integer, number of observations in data
-#' @param T_vals vector of observations
+#' @param theta_before_k integer, number of observations in data
+#' @param lambda_before_k vector of observations
 #'
 #' @keywords internal
-thetha_hat_approx <- function(theta_before_k, lambda_before_k, Hess_before_k, grad_before_k) {
-  UseMethod("thetha_hat_approx")
+theta_hat_approx <- function(n, T_vals) {
+  UseMethod("theta_hat_approx")
 }
 
 #'
 #' @keywords internal
-thetha_hat_approx.default <- function(n, T_vals){
+theta_hat_approx.numeric <- function(n, T_vals){
   function(x) n / x + sum(log(T_vals)) - (n / sum(T_vals ^ x)) * sum(log(T_vals) * (T_vals) ^ x)
 }
 
@@ -46,8 +46,9 @@ mle_theta_full_sample <- function(n, T_vals) {
 
 #' @importFrom pracma bisect
 #' @keywords internal
-mle_theta_full_sample.default <- function(n, T_vals)
-  pracma::bisect(thetha_hat_approx(n, T_vals), 0, 10)$root
+mle_theta_full_sample.numeric <- function(n, T_vals) {
+  pracma::bisect(theta_hat_approx(n, T_vals), 0, 10)$root
+  }
 
 
 #' Starting Points - lambda, full sample
@@ -63,7 +64,7 @@ mle_lambda_full_sample <- function(n, T_vals, theta_hat_est = mle_theta_full_sam
 }
 
 #' @keywords internal
-mle_lambda_full_sample.default <- function(n, T_vals, theta_hat_est = mle_theta_full_sample(n, T_vals)){
+mle_lambda_full_sample.numeric <- function(n, T_vals, theta_hat_est = mle_theta_full_sample(n, T_vals)){
   (1 / n * (sum(T_vals ^ theta_hat_est))) ^ (1 / theta_hat_est)
 }
 
@@ -71,23 +72,17 @@ mle_lambda_full_sample.default <- function(n, T_vals, theta_hat_est = mle_theta_
 #'
 #' @param T_dt data table with one column with values of observation, second one contains information if the observation
 #' is censured or not
-#' @param theta_0 starting point of Newton Algorithm for theta parameter (shape parameter); default value is the result of function
-#' \code{\link{mle_theta_full_sample}}
-#' @param lambda_0 starting point of Newton Algorithm for lambda parameter (scale parameter); default value is the result of function
-#' \code{\link{mle_lambda_full_sample}}
 #'
 #' @import data.table
 #' @export
-Newton_result <- function(T_dt,
-                          theta_0 = mle_theta_full_sample(n, T_dt[, get(names(T_dt)[1])]),
-                          lambda_0 = mle_lambda_full_sample(n, T_dt[, get(names(T_dt)[1])], theta_0)){
+Newton_result <- function(T_dt){
   UseMethod("Newton_result")
 }
 
 #' @keywords internal
-Newton_result.default <- function(T_dt,
-                                  theta_0 = mle_theta_full_sample(n, T_dt[, get(names(T_dt)[1])]),
-                                  lambda_0 = mle_lambda_full_sample(n, T_dt[, get(names(T_dt)[1])], theta_0)){
+Newton_result.data.table <- function(T_dt){
+  theta_0 <- mle_theta_full_sample(T_dt[, .N], T_dt[, get(names(T_dt)[1])])
+  lambda_0 <- mle_lambda_full_sample(T_dt[, .N], T_dt[, get(names(T_dt)[1])], theta_0)
   T_v <- T_dt[, get(names(T_dt)[1])]
   delta <-  T_dt[, get(names(T_dt)[2])]
   x_k <- c(theta_0, lambda_0)
@@ -95,7 +90,7 @@ Newton_result.default <- function(T_dt,
   grd_k <- grad_k(T_v, delta, x_k[1], x_k[2])
   x_k2 <- Newton_k_step(x_k[1], x_k[2], Hess_k, grd_k)
 
-  while((abs(x_k2[1] - x_k[1]) > 0.000005 | abs(x_k2[2] - x_k[2]) > 0.000005)){
+  while((abs(x_k2[1] - x_k[1]) > 0.00005 | abs(x_k2[2] - x_k[2]) > 0.00005)){
     x_k <- c(x_k2[1], x_k2[2])
     Hess_k <- Hessian_k(T_v, delta, x_k[1], x_k[2])
     if(NaN %in% Hess_k) break
@@ -116,7 +111,6 @@ Newton_result.default <- function(T_dt,
 
   c(theta_k2, lambda_k2)
 }
-
 
 
 

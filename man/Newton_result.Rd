@@ -4,21 +4,11 @@
 \alias{Newton_result}
 \title{Newton-Raphson Algorithm}
 \usage{
-Newton_result(
-  T_dt,
-  theta_0 = mle_theta_full_sample(n, T_dt[, get(names(T_dt)[1])]),
-  lambda_0 = mle_lambda_full_sample(n, T_dt[, get(names(T_dt)[1])], theta_0)
-)
+Newton_result(T_dt)
 }
 \arguments{
 \item{T_dt}{data table with one column with values of observation, second one contains information if the observation
 is censured or not}
-
-\item{theta_0}{starting point of Newton Algorithm for theta parameter (shape parameter); default value is the result of function
-\code{\link{mle_theta_full_sample}}}
-
-\item{lambda_0}{starting point of Newton Algorithm for lambda parameter (scale parameter); default value is the result of function
-\code{\link{mle_lambda_full_sample}}}
 }
 \description{
 Newton-Raphson Algorithm
