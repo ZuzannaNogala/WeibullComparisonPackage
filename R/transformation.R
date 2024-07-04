@@ -73,6 +73,14 @@ m_find_function <- function(x, perc_of_cens){
 #' @param x a numeric vector with observations of full sample
 #' @param perc_of_cens numeric, percentage of censorship (value from (0, 1])
 #'
+#' @importFrom pracma bisect
+#'
+#' @examples
+#' X <- rweibull(100, 2, 1)
+#' C <- runif(100, 0, m_find(X, 0.1))
+#' delta <- pmin(X,C) == C
+#' mean(delta)
+#'
 #' @export
 m_find <- function(x, perc_of_cens){
   UseMethod("m_find")

@@ -51,19 +51,19 @@ mle_lambda_full_sample <- function(n, T_vals, theta_hat_est = mle_theta_full_sam
 #' @param T_dt data table with one column with values of observation, second one contains information if the observation
 #' is censured or not
 #'
+#' @import data.table
+#' @importFrom stats rweibull runif
+#'
 #' @examples
 #' X <- rweibull(100, 2, 1)
 #' C <- runif(100, 0, m_find(X, 0.1))
-#' T_dt <- data.table("T_val" = pmin(X, C), "delta" = X==C)
+#' T_dt <- data.table("T_val" = pmin(X, C), "delta" = pmin(X, C) == X)
 #' Newton_result(T_dt)
 #'
 #' @export
 Newton_result <- function(T_dt){
   UseMethod("Newton_result")
 }
-
-#' @import data.table
-#' @importFrom stats rweibull runif
 #' @export
 Newton_result.data.table <- function(T_dt){
   theta_0 <- mle_theta_full_sample(T_dt[, .N], T_dt[, get(names(T_dt)[1])])

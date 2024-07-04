@@ -14,3 +14,10 @@ m_find(x, perc_of_cens)
 \description{
 Function to find
 }
+\examples{
+X <- rweibull(100, 2, 1)
+C <- runif(100, 0, m_find(X, 0.1))
+delta <- pmin(X,C) == C
+mean(delta)
+
+}
