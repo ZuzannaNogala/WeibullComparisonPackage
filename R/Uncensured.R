@@ -39,7 +39,7 @@ compute_test_values_uncens <- function(n){
 #' @keywords internal
 generation_quantiles_uncens <- function(m, n1, ...){
   n_params_list <- list(n1, ...)
-  df <- as.data.frame(replicate(m, unlist(n_params_list)))
+  df <- as.data.frame(rbind(replicate(m, unlist(n_params_list))))
   cols_df <- paste0("uncesured_", unlist(n_params_list))
 
   n_cores <- detectCores() - 1
@@ -137,4 +137,3 @@ getQuantiles_DF.default <- function(alpha, m, n1, ...){
   rownames(df) <- rownames_df
   df
 }
-
