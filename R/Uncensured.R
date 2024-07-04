@@ -105,7 +105,7 @@ getQuantileForTest <- function(df, strTestName, m = 10000, alpha = 0.05){
 #'
 #' @keywords internal
 getQuantilesForEachTest <- function(df, m, alpha = 0.05){
-  sapply(names(dt), function(name) getQuantileForTest(dt, name, m, alpha))
+  sapply(names(df), function(name) getQuantileForTest(df, name, m, alpha))
 }
 
 #' Compute Quantiles for each test and each type of data
@@ -137,3 +137,4 @@ getQuantiles_DF <- function(alpha, m, n1, ...){
   rownames(df) <- rownames_df
   df
 }
+
