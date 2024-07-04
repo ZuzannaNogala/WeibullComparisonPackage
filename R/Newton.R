@@ -46,10 +46,22 @@ mle_lambda_full_sample <- function(n, T_vals, theta_hat_est = mle_theta_full_sam
   (1 / n * (sum(T_vals ^ theta_hat_est))) ^ (1 / theta_hat_est)
 }
 
-#' Newton-Raphson Algorithm
+#' Maximum Likelihood Estimation of two-parameter Weibull distribution using Newton-Raphson algorithm
+#'
+#' Newton-Raphson algorithm is numerical method applied to find estimation of roots of function. In this case method was used
+#' to find the root of loglikelihood function for Weibull distribution which is described by the formula:
+#' \deqn{l(\lambda, \theta|\textbf{X}) =
+#' \log{(\theta)}\sum^n_{i=1}\delta_i -
+#' \theta\log{(\lambda)}\sum^n_{i=1}\delta_i +
+#' (\theta - 1)\sum^n_{i=1}\delta_i\log{(X_i)} -
+#' \lambda^{-\theta}\sum^n_{i=1}X_i^{\theta},}
+#' where \eqn{\delta_i} ...
+#' The starting points of algorithm are solution of ...
 #'
 #' @param T_dt data table with one column with values of observation, second one contains information if the observation
 #' is censured or not
+#'
+#' @return a list which contains estimation of theta and lambda parameters
 #'
 #' @import data.table
 #' @importFrom stats rweibull runif

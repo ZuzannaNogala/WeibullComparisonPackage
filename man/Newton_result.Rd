@@ -2,7 +2,7 @@
 % Please edit documentation in R/Newton.R
 \name{Newton_result}
 \alias{Newton_result}
-\title{Newton-Raphson Algorithm}
+\title{Maximum Likelihood Estimation of two-parameter Weibull distribution using Newton-Raphson algorithm}
 \usage{
 Newton_result(T_dt)
 }
@@ -10,8 +10,19 @@ Newton_result(T_dt)
 \item{T_dt}{data table with one column with values of observation, second one contains information if the observation
 is censured or not}
 }
+\value{
+a list which contains estimation of theta and lambda parameters
+}
 \description{
-Newton-Raphson Algorithm
+Newton-Raphson algorithm is numerical method applied to find estimation of roots of function. In this case method was used
+to find the root of loglikelihood function for Weibull distribution which is described by the formula:
+\deqn{l(\lambda, \theta|\textbf{X}) =
+\log{(\theta)}\sum^n_{i=1}\delta_i -
+\theta\log{(\lambda)}\sum^n_{i=1}\delta_i +
+(\theta - 1)\sum^n_{i=1}\delta_i\log{(X_i)} -
+\lambda^{-\theta}\sum^n_{i=1}X_i^{\theta},}
+where \eqn{\delta_i} ...
+The starting points of algorithm are solution of ...
 }
 \examples{
 X <- rweibull(100, 2, 1)
