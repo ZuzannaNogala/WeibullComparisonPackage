@@ -3,6 +3,7 @@
 S3method(Newton_result,data.table)
 S3method(m_find,default)
 export(Newton_result)
+export(getQuantiles_DF)
 export(m_find)
 import(data.table)
 import(parallel)

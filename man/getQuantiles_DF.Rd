@@ -18,4 +18,3 @@ getQuantiles_DF(alpha, m, n1, ...)
 \description{
 Compute Quantiles for each test and each type of data
 }
-\keyword{internal}
