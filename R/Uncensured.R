@@ -122,7 +122,7 @@ getQuantiles_DF <- function(alpha, m, n1, ...){
   UseMethod("getQuantiles_DF")
 }
 #' @export
-getQuantiles_DF <- function(alpha, m, n1, ...){
+getQuantiles_DF.default <- function(alpha, m, n1, ...){
   list_of_comp_stats <- generation_quantiles_uncens(m, n1, ...)
   rownames_df <- paste0("uncesured_", c(n1, ...))
   n_cores <- detectCores() - 1
