@@ -31,7 +31,7 @@ theta_hat_approx <- function(n, T_vals){
 #' @keywords internal
 mle_theta_full_sample<- function(n, T_vals) {
   pracma::bisect(theta_hat_approx(n, T_vals), 0, 10)$root
-  }
+}
 
 
 #' Starting Points - lambda, full sample
@@ -51,12 +51,19 @@ mle_lambda_full_sample <- function(n, T_vals, theta_hat_est = mle_theta_full_sam
 #' @param T_dt data table with one column with values of observation, second one contains information if the observation
 #' is censured or not
 #'
+#' @examples
+#' X <- rweibull(100, 2, 1)
+#' C <- runif(100, 0, m_find(X, 0.1))
+#' T_dt <- data.table("T_val" = pmin(X, C), "delta" = X==C)
+#' Newton_result(T_dt)
+#'
 #' @export
 Newton_result <- function(T_dt){
   UseMethod("Newton_result")
 }
 
 #' @import data.table
+#' @importFrom stats rweibull runif
 #' @export
 Newton_result.data.table <- function(T_dt){
   theta_0 <- mle_theta_full_sample(T_dt[, .N], T_dt[, get(names(T_dt)[1])])
@@ -87,7 +94,7 @@ Newton_result.data.table <- function(T_dt){
     lambda_k2 <- x_k2[2]
   }
 
-  c(theta_k2, lambda_k2)
+  list("theta" = theta_k2, "lambda" = lambda_k2)
 }
 
 

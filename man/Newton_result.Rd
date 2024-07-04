@@ -13,3 +13,10 @@ is censured or not}
 \description{
 Newton-Raphson Algorithm
 }
+\examples{
+X <- rweibull(100, 2, 1)
+C <- runif(100, 0, m_find(X, 0.1))
+T_dt <- data.table("T_val" = pmin(X, C), "delta" = X==C)
+Newton_result(T_dt)
+
+}
