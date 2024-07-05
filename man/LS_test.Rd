@@ -2,17 +2,21 @@
 % Please edit documentation in R/statistictsUsedInComparison.R
 \name{LS_test}
 \alias{LS_test}
-\title{Liao and Shimokawa test - Right-Censored Sample Case}
+\title{Computing value of Liao and Shimokawa test (\eqn{LS_n*}) for right-censored samples}
 \usage{
 LS_test(Y_vec_dt, n)
 }
 \arguments{
-\item{Y_vec_dt}{a data table which contains value of transformed data statistic Y and
-information of observation's censoring}
+\item{Y_vec_dt}{a data.table object, two-columns table which contains value of statistic \eqn{Y}
+and information of observation's censoring (1 - uncensored, 0 - censored).}
 
-\item{n}{integer, number of observations in data}
+\item{n}{integer, amount of observations in data}
+}
+\value{
+numeric,a value of test statistic \eqn{LS_n*}
 }
 \description{
-Liao and Shimokawa test - Right-Censored Sample Case
+Classic Liao and Shimokawa test (\eqn{LS_n*}) applied to data without censoring.
+The formula used in below function is from ...
 }
 \keyword{internal}

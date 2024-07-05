@@ -2,17 +2,22 @@
 % Please edit documentation in R/statistictsUsedInComparison.R
 \name{KS_test}
 \alias{KS_test}
-\title{Kolmogorov-Smirnov test - Right-Censored Sample Case}
+\title{Computing value of Komogorov-Smirnov test (\eqn{KS_n^*}) for right-censored samples}
 \usage{
 KS_test(Y_vec_dt, n)
 }
 \arguments{
-\item{Y_vec_dt}{a data table which contains value of transformed data statistic Y and
-information of observation's censoring}
+\item{Y_vec_dt}{a data.table object, two-columns table which contains value of statistic \eqn{Y}
+and information of observation's censoring (1 - uncensored, 0 - censored).}
 
-\item{n}{integer, number of observations in data}
+\item{n}{integer, amount of observations in data}
+}
+\value{
+numeric,a value of test statistic \eqn{KS_n*}
 }
 \description{
-Kolmogorov-Smirnov test - Right-Censored Sample Case
+Classic one-sample Kolmogorov-Smirnov test (\eqn{KS_n^*}) which was modified by ... to usage for data with
+presence of censoring. Because of the Kaplan-Meier estimator is standard nonparametric estimator of ...,
+The test can be use for full samples. However ... The formula used in below function is from ...
 }
 \keyword{internal}

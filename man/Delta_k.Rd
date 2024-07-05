@@ -2,19 +2,24 @@
 % Please edit documentation in R/newstatistics.R
 \name{Delta_k}
 \alias{Delta_k}
-\title{Delta statistic}
+\title{Computing value of statistic \eqn{\Delta_k}}
 \usage{
 Delta_k(k, n, sort_Y_vec_dt)
 }
 \arguments{
-\item{k}{numeric, the value, where the estimator will be counted}
+\item{k}{integer, k-th observation in sorted data}
 
-\item{n}{integer, number of observations in data}
+\item{n}{integer, amount of observations in data}
 
-\item{sort_Y_vec_dt}{a data table which contains value of sorted statistic Y and
-information of observation's censoring}
+\item{sort_Y_vec_dt}{data.table object, two-columns table which contains value of sorted statistic \eqn{Y}
+and information of observation's censoring (1 - uncensored, 0 - censored).}
+}
+\value{
+numeric, a value of statistic \eqn{\Delta_k}
 }
 \description{
-Delta statistic
+Statistic represents the size of jump in \eqn{G_n(T_{(k)})} and can be described by a formula
+\deqn{\Delta_k = G_n(T_{(k)}) - \lim_{t \rightarrow T_{(k)}} G_n(t), \ k = 1, \ldots n} This difference can be simplified to
+calculable expression and the function \code{Delta_k} used it to computes value of statistic.
 }
 \keyword{internal}

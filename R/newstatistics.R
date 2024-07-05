@@ -1,9 +1,15 @@
-#' Delta statistic
+#' Computing value of statistic \eqn{\Delta_k}
 #'
-#' @param k numeric, the value, where the estimator will be counted
-#' @param n integer, number of observations in data
-#' @param sort_Y_vec_dt a data table which contains value of sorted statistic Y and
-#' information of observation's censoring
+#' Statistic represents the size of jump in \eqn{G_n(T_{(k)})} and can be described by a formula
+#' \deqn{\Delta_k = G_n(T_{(k)}) - \lim_{t \rightarrow T_{(k)}} G_n(t), \ k = 1, \ldots n} This difference can be simplified to
+#' calculable expression and the function \code{Delta_k} used it to computes value of statistic.
+#'
+#' @param k integer, k-th observation in sorted data
+#' @param n integer, amount of observations in data
+#' @param sort_Y_vec_dt data.table object, two-columns table which contains value of sorted statistic \eqn{Y}
+#' and information of observation's censoring (1 - uncensored, 0 - censored).
+#'
+#' @return numeric, a value of statistic \eqn{\Delta_k}
 #'
 #' @import data.table
 #'
@@ -15,13 +21,16 @@ Delta_k <- function(k, n, sort_Y_vec_dt){
   else (delta_vec[k] / (n - k + 1)) * prod(((n - 1 : (k - 1)) / (n - 1 : (k - 1) + 1)) ^ delta_vec[1 : (k - 1)])
 }
 
-#' New Statistics
+#' Computing value of new statistics - \eqn{S_{n,a}^{(1)}} and \eqn{S_{n,a}^{(2)}}
+#'
+#'
 #'
 #' @param a numeric, the value of statistic's parameter
 #' @param n integer, number of observations in data
 #' @param Y_vec_dt a data table which contains value of transformed statistic T (Y) and
 #' information of observation's censoring
 #'
+#' @return numeric, a value of test statistic \eqn{S_{n,a}^{(1)}} or \eqn{S_{n,a}^{(2)}}
 #'
 #' @rdname newStatistics
 #' @keywords internal

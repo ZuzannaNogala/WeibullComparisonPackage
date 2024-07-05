@@ -2,20 +2,24 @@
 % Please edit documentation in R/statistictsUsedInComparison.R
 \name{KS_test_full}
 \alias{KS_test_full}
-\title{Komogorov-Smirnov test - Full Sample Case}
+\title{Computing value of Komogorov-Smirnov test (\eqn{KS_n}) for full samples}
 \usage{
 KS_test_full(X_vec, theta_hat, lambda_hat, n)
 }
 \arguments{
-\item{X_vec}{numeric, the values from uncensured sample}
+\item{X_vec}{numeric, the values of observations from uncensored sample}
 
 \item{theta_hat}{a estimator of parameter theta (shape parameter)}
 
 \item{lambda_hat}{a estimator of parameter lambda (scale parameter)}
 
-\item{n}{integer, number of observations in data}
+\item{n}{integer, amount of observations in data}
+}
+\value{
+numeric,a value of test statistic \eqn{KS_n}
 }
 \description{
-Komogorov-Smirnov test - Full Sample Case
+Classic one-sample Kolmogorov-Smirnov test (\eqn{KS_n}) applied to data without censoring.
+The formula used in below function is from ...
 }
 \keyword{internal}

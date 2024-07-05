@@ -2,16 +2,21 @@
 % Please edit documentation in R/statistictsUsedInComparison.R
 \name{LS_test_full}
 \alias{LS_test_full}
-\title{Liao and Shimokawa test - Full Sample Case}
+\title{Computing value of Liao and Shimokawa test (\eqn{LS_n}) for full samples}
 \usage{
 LS_test_full(X_vec, n)
 }
 \arguments{
-\item{X_vec}{numeric, the values from uncensured sample}
+\item{X_vec}{numeric, the values of observations from uncensored sample}
 
-\item{n}{integer, number of observations in data}
+\item{n}{integer, amount of observations in data}
+}
+\value{
+numeric,a value of test statistic \eqn{LS_n}
 }
 \description{
-Liao and Shimokawa test - Full Sample Case
+Classic Liao and Shimokawa test (\eqn{LS_n}) applied to data without censoring.
+The formula used in below function is from ... By contrast to another tests, the
+\eqn{LS_n} uses least squares estimators of parameters.
 }
 \keyword{internal}

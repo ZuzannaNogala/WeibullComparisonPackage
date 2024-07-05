@@ -1,10 +1,15 @@
 globalVariables(c("sort_Y_val", "delta", "."))
-#' Komogorov-Smirnov test - Full Sample Case
+#' Computing value of Komogorov-Smirnov test (\eqn{KS_n}) for full samples
 #'
-#' @param X_vec numeric, the values from uncensured sample
+#' Classic one-sample Kolmogorov-Smirnov test (\eqn{KS_n}) applied to data without censoring.
+#' The formula used in below function is from ...
+#'
+#' @param X_vec numeric, the values of observations from uncensored sample
 #' @param theta_hat a estimator of parameter theta (shape parameter)
 #' @param lambda_hat a estimator of parameter lambda (scale parameter)
-#' @param n integer, number of observations in data
+#' @param n integer, amount of observations in data
+#'
+#' @return numeric,a value of test statistic \eqn{KS_n}
 #'
 #' @keywords internal
 KS_test_full <- function(X_vec, theta_hat, lambda_hat, n){
@@ -16,12 +21,17 @@ KS_test_full <- function(X_vec, theta_hat, lambda_hat, n){
   sqrt(n) * max(expr1, expr2)
 }
 
-#' Cramer-von Mises test - Full Sample Case
+#' Computing value of Cramér von Mises test (\eqn{CM_n}) for full samples
 #'
-#' @param X_vec numeric, the values from uncensured sample
+#' Classic Cramér von Mises test (\eqn{CM_n}) applied to data without censoring.
+#' The formula used in below function is from ...
+#'
+#' @param X_vec numeric, the values of observations from uncensored sample
 #' @param theta_hat a estimator of parameter theta (shape parameter)
 #' @param lambda_hat a estimator of parameter lambda (scale parameter)
-#' @param n integer, number of observations in data
+#' @param n integer, amount of observations in data
+#'
+#' @return numeric,a value of test statistic \eqn{CM_n}
 #'
 #' @keywords internal
 #' @keywords internal
@@ -32,10 +42,16 @@ CM_test_full<- function(X_vec, theta_hat, lambda_hat, n){
   sum((U_sort - (2 * (1:n) - 1) / (2 * n))^2) + 1 / (12 * n)
 }
 
-#' Liao and Shimokawa test - Full Sample Case
+#' Computing value of Liao and Shimokawa test (\eqn{LS_n}) for full samples
 #'
-#' @param X_vec numeric, the values from uncensured sample
-#' @param n integer, number of observations in data
+#' Classic Liao and Shimokawa test (\eqn{LS_n}) applied to data without censoring.
+#' The formula used in below function is from ... By contrast to another tests, the
+#' \eqn{LS_n} uses least squares estimators of parameters.
+#'
+#' @param X_vec numeric, the values of observations from uncensored sample
+#' @param n integer, amount of observations in data
+#'
+#' @return numeric,a value of test statistic \eqn{LS_n}
 #'
 #' @importFrom EWGoF LSEst
 #'
@@ -53,11 +69,17 @@ LS_test_full <- function(X_vec, n){
   1 / sqrt(n) * sum(pmax(expr_1, expr_2) / sqrt(U_sort * (1 - U_sort)))
 }
 
-#' Kolmogorov-Smirnov test - Right-Censored Sample Case
+#' Computing value of Komogorov-Smirnov test (\eqn{KS_n^*}) for right-censored samples
 #'
-#' @param Y_vec_dt a data table which contains value of transformed data statistic Y and
-#' information of observation's censoring
-#' @param n integer, number of observations in data
+#' Classic one-sample Kolmogorov-Smirnov test (\eqn{KS_n^*}) which was modified by ... to usage for data with
+#' presence of censoring. Because of the Kaplan-Meier estimator is standard nonparametric estimator of ...,
+#' The test can be use for full samples. However ... The formula used in below function is from ...
+#'
+#' @param Y_vec_dt a data.table object, two-columns table which contains value of statistic \eqn{Y}
+#' and information of observation's censoring (1 - uncensored, 0 - censored).
+#' @param n integer, amount of observations in data
+#'
+#' @return numeric,a value of test statistic \eqn{KS_n*}
 #'
 #' @import data.table
 #'
@@ -74,11 +96,16 @@ KS_test<- function(Y_vec_dt, n){
   max(S1, S2)
 }
 
-#' Cramer-von Mises test - Right_censored Sample Case
+#' Computing value of Cramér von Mises test (\eqn{CM_n*}) for right-censored samples
 #'
-#' @param Y_vec_dt a data table which contains value of transformed data statistic Y and
-#' information of observation's censoring
-#' @param n integer, number of observations in data
+#' Classic Cramér von Mises test (\eqn{CM_n*}) which was modified by ... to usage for data with presence of
+#' censoring. The formula used in below function is from ...
+#'
+#' @param Y_vec_dt a data.table object, two-columns table which contains value of statistic \eqn{Y}
+#' and information of observation's censoring (1 - uncensored, 0 - censored).
+#' @param n integer, amount of observations in data
+#'
+#' @return numeric,a value of test statistic \eqn{CM_n*}
 #'
 #' @import data.table
 #' @keywords internal
@@ -98,11 +125,16 @@ CM_test <- function(Y_vec_dt, n){
   sum(expr_full) * n + n / 3
 }
 
-#' Liao and Shimokawa test - Right-Censored Sample Case
+#' Computing value of Liao and Shimokawa test (\eqn{LS_n*}) for right-censored samples
 #'
-#' @param Y_vec_dt a data table which contains value of transformed data statistic Y and
-#' information of observation's censoring
-#' @param n integer, number of observations in data
+#' Classic Liao and Shimokawa test (\eqn{LS_n*}) applied to data without censoring.
+#' The formula used in below function is from ...
+#'
+#' @param Y_vec_dt a data.table object, two-columns table which contains value of statistic \eqn{Y}
+#' and information of observation's censoring (1 - uncensored, 0 - censored).
+#' @param n integer, amount of observations in data
+#'
+#' @return numeric,a value of test statistic \eqn{LS_n*}
 #'
 #' @import data.table
 #' @keywords internal

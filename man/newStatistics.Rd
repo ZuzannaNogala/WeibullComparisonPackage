@@ -3,7 +3,7 @@
 \name{S_n_1}
 \alias{S_n_1}
 \alias{S_n_2}
-\title{New Statistics}
+\title{Computing value of new statistics - \eqn{S_{n,a}^{(1)}} and \eqn{S_{n,a}^{(2)}}}
 \usage{
 S_n_1(a, n, Y_vec_dt)
 
@@ -17,7 +17,10 @@ S_n_2(a, n, Y_dt)
 \item{Y_vec_dt}{a data table which contains value of transformed statistic T (Y) and
 information of observation's censoring}
 }
+\value{
+numeric, a value of test statistic \eqn{S_{n,a}^{(1)}} or \eqn{S_{n,a}^{(2)}}
+}
 \description{
-New Statistics
+Computing value of new statistics - \eqn{S_{n,a}^{(1)}} and \eqn{S_{n,a}^{(2)}}
 }
 \keyword{internal}

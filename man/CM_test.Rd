@@ -2,17 +2,21 @@
 % Please edit documentation in R/statistictsUsedInComparison.R
 \name{CM_test}
 \alias{CM_test}
-\title{Cramer-von Mises test - Right_censored Sample Case}
+\title{Computing value of Cramér von Mises test (\eqn{CM_n*}) for right-censored samples}
 \usage{
 CM_test(Y_vec_dt, n)
 }
 \arguments{
-\item{Y_vec_dt}{a data table which contains value of transformed data statistic Y and
-information of observation's censoring}
+\item{Y_vec_dt}{a data.table object, two-columns table which contains value of statistic \eqn{Y}
+and information of observation's censoring (1 - uncensored, 0 - censored).}
 
-\item{n}{integer, number of observations in data}
+\item{n}{integer, amount of observations in data}
+}
+\value{
+numeric,a value of test statistic \eqn{CM_n*}
 }
 \description{
-Cramer-von Mises test - Right_censored Sample Case
+Classic Cramér von Mises test (\eqn{CM_n*}) which was modified by ... to usage for data with presence of
+censoring. The formula used in below function is from ...
 }
 \keyword{internal}
