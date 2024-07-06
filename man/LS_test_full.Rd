@@ -3,6 +3,11 @@
 \name{LS_test_full}
 \alias{LS_test_full}
 \title{Computing value of Liao and Shimokawa test (\eqn{LS_n}) for full samples}
+\source{
+M. Liao, T. Shimokawa. “A new goodness-of-fit test for type-I extreme-value and
+2-parameter weibull distributions with estimated parameters”.
+Journal of Statistical Computation and Simulation 64 (1999), pp. 23–48
+}
 \usage{
 LS_test_full(X_vec, n)
 }
@@ -16,7 +21,9 @@ numeric,a value of test statistic \eqn{LS_n}
 }
 \description{
 Classic Liao and Shimokawa test (\eqn{LS_n}) applied to data without censoring.
-The formula used in below function is from ... By contrast to another tests, the
-\eqn{LS_n} uses least squares estimators of parameters.
+}
+\details{
+By contrast to another tests, Liao and Shimokawa's statistic is constructed base on
+the least squares estimators of parameters instead of maximum likelihood ones.
 }
 \keyword{internal}

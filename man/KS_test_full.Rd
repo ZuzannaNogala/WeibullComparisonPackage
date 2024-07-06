@@ -3,6 +3,9 @@
 \name{KS_test_full}
 \alias{KS_test_full}
 \title{Computing value of Komogorov-Smirnov test (\eqn{KS_n}) for full samples}
+\source{
+R. B. D’Agostino, M. A. Stephens. "Goodness-of-Fit Techniques". New York: Marcel Dekker (1986)
+}
 \usage{
 KS_test_full(X_vec, theta_hat, lambda_hat, n)
 }
@@ -20,6 +23,5 @@ numeric,a value of test statistic \eqn{KS_n}
 }
 \description{
 Classic one-sample Kolmogorov-Smirnov test (\eqn{KS_n}) applied to data without censoring.
-The formula used in below function is from ...
 }
 \keyword{internal}

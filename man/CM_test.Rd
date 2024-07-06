@@ -2,7 +2,10 @@
 % Please edit documentation in R/statistictsUsedInComparison.R
 \name{CM_test}
 \alias{CM_test}
-\title{Computing value of Cramér von Mises test (\eqn{CM_n*}) for right-censored samples}
+\title{Computing value of Cramér von Mises test (\eqn{CM_n^*}) for right-censored samples}
+\source{
+J.A. Koziol, S.B. Green. “A Cram ́er-von Mises statistic for randomly censored data”. Biometrika 63 (1976), pp. 465–476
+}
 \usage{
 CM_test(Y_vec_dt, n)
 }
@@ -13,10 +16,15 @@ and information of observation's censoring (1 - uncensored, 0 - censored).}
 \item{n}{integer, amount of observations in data}
 }
 \value{
-numeric,a value of test statistic \eqn{CM_n*}
+numeric,a value of test statistic \eqn{CM_n^*}
 }
 \description{
-Classic Cramér von Mises test (\eqn{CM_n*}) which was modified by ... to usage for data with presence of
-censoring. The formula used in below function is from ...
+Classic Cramér von Mises test (\eqn{CM_n^*}) which was modified by to usage for data with presence of
+censoring.
+}
+\details{
+The test can be applied for full samples as well because of a Kaplan-Meier
+estimator's universality. However, it can be lead too much simplification of algorithm to computing quantiles.
+Hence, in that case it is recommended use \code{\link{CM_test_full}}.
 }
 \keyword{internal}

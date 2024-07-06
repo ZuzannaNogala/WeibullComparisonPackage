@@ -2,7 +2,6 @@ globalVariables(c("sort_Y_val", "delta", "."))
 #' Computing value of Komogorov-Smirnov test (\eqn{KS_n}) for full samples
 #'
 #' Classic one-sample Kolmogorov-Smirnov test (\eqn{KS_n}) applied to data without censoring.
-#' The formula used in below function is from ...
 #'
 #' @param X_vec numeric, the values of observations from uncensored sample
 #' @param theta_hat a estimator of parameter theta (shape parameter)
@@ -10,6 +9,8 @@ globalVariables(c("sort_Y_val", "delta", "."))
 #' @param n integer, amount of observations in data
 #'
 #' @return numeric,a value of test statistic \eqn{KS_n}
+#'
+#' @source R. B. D’Agostino, M. A. Stephens. "Goodness-of-Fit Techniques". New York: Marcel Dekker (1986)
 #'
 #' @keywords internal
 KS_test_full <- function(X_vec, theta_hat, lambda_hat, n){
@@ -24,7 +25,6 @@ KS_test_full <- function(X_vec, theta_hat, lambda_hat, n){
 #' Computing value of Cramér von Mises test (\eqn{CM_n}) for full samples
 #'
 #' Classic Cramér von Mises test (\eqn{CM_n}) applied to data without censoring.
-#' The formula used in below function is from ...
 #'
 #' @param X_vec numeric, the values of observations from uncensored sample
 #' @param theta_hat a estimator of parameter theta (shape parameter)
@@ -32,6 +32,8 @@ KS_test_full <- function(X_vec, theta_hat, lambda_hat, n){
 #' @param n integer, amount of observations in data
 #'
 #' @return numeric,a value of test statistic \eqn{CM_n}
+#'
+#' @source R. B. D’Agostino, M. A. Stephens. "Goodness-of-Fit Techniques". New York: Marcel Dekker (1986)
 #'
 #' @keywords internal
 #' @keywords internal
@@ -45,13 +47,18 @@ CM_test_full<- function(X_vec, theta_hat, lambda_hat, n){
 #' Computing value of Liao and Shimokawa test (\eqn{LS_n}) for full samples
 #'
 #' Classic Liao and Shimokawa test (\eqn{LS_n}) applied to data without censoring.
-#' The formula used in below function is from ... By contrast to another tests, the
-#' \eqn{LS_n} uses least squares estimators of parameters.
 #'
 #' @param X_vec numeric, the values of observations from uncensored sample
 #' @param n integer, amount of observations in data
 #'
 #' @return numeric,a value of test statistic \eqn{LS_n}
+#'
+#' @details By contrast to another tests, Liao and Shimokawa's statistic is constructed base on
+#' the least squares estimators of parameters instead of maximum likelihood ones.
+#'
+#' @source M. Liao, T. Shimokawa. “A new goodness-of-fit test for type-I extreme-value and
+#' 2-parameter weibull distributions with estimated parameters”.
+#' Journal of Statistical Computation and Simulation 64 (1999), pp. 23–48
 #'
 #' @importFrom EWGoF LSEst
 #'
@@ -71,15 +78,21 @@ LS_test_full <- function(X_vec, n){
 
 #' Computing value of Komogorov-Smirnov test (\eqn{KS_n^*}) for right-censored samples
 #'
-#' Classic one-sample Kolmogorov-Smirnov test (\eqn{KS_n^*}) which was modified by ... to usage for data with
-#' presence of censoring. Because of the Kaplan-Meier estimator is standard nonparametric estimator of ...,
-#' The test can be use for full samples. However ... The formula used in below function is from ...
+#' Classic one-sample Kolmogorov-Smirnov test (\eqn{KS_n^*}) which was modified to usage for data with
+#' presence of censoring.
+#'
+#' @details
+#' The test can be applied for full samples as well because of a Kaplan-Meier
+#' estimator's universality. However, it can be lead too much simplification of algorithm to computing quantiles.
+#' Hence, in that case it is recommended use \code{\link{KS_test_full}}.
+#'
+#' @source J.A. Koziol, S.B. Green. “A Cram ́er-von Mises statistic for randomly censored data”. Biometrika 63 (1976), pp. 465–474
 #'
 #' @param Y_vec_dt a data.table object, two-columns table which contains value of statistic \eqn{Y}
 #' and information of observation's censoring (1 - uncensored, 0 - censored).
 #' @param n integer, amount of observations in data
 #'
-#' @return numeric,a value of test statistic \eqn{KS_n*}
+#' @return numeric,a value of test statistic \eqn{KS_n^*}
 #'
 #' @import data.table
 #'
@@ -96,16 +109,23 @@ KS_test<- function(Y_vec_dt, n){
   max(S1, S2)
 }
 
-#' Computing value of Cramér von Mises test (\eqn{CM_n*}) for right-censored samples
+#' Computing value of Cramér von Mises test (\eqn{CM_n^*}) for right-censored samples
 #'
-#' Classic Cramér von Mises test (\eqn{CM_n*}) which was modified by ... to usage for data with presence of
-#' censoring. The formula used in below function is from ...
+#' Classic Cramér von Mises test (\eqn{CM_n^*}) which was modified by to usage for data with presence of
+#' censoring.
+#'
+#' @details
+#' The test can be applied for full samples as well because of a Kaplan-Meier
+#' estimator's universality. However, it can be lead too much simplification of algorithm to computing quantiles.
+#' Hence, in that case it is recommended use \code{\link{CM_test_full}}.
+#'
+#' @source J.A. Koziol, S.B. Green. “A Cram ́er-von Mises statistic for randomly censored data”. Biometrika 63 (1976), pp. 465–476
 #'
 #' @param Y_vec_dt a data.table object, two-columns table which contains value of statistic \eqn{Y}
 #' and information of observation's censoring (1 - uncensored, 0 - censored).
 #' @param n integer, amount of observations in data
 #'
-#' @return numeric,a value of test statistic \eqn{CM_n*}
+#' @return numeric,a value of test statistic \eqn{CM_n^*}
 #'
 #' @import data.table
 #' @keywords internal
@@ -125,16 +145,24 @@ CM_test <- function(Y_vec_dt, n){
   sum(expr_full) * n + n / 3
 }
 
-#' Computing value of Liao and Shimokawa test (\eqn{LS_n*}) for right-censored samples
+#' Computing value of Liao and Shimokawa test (\eqn{LS_n^*}) for right-censored samples
 #'
-#' Classic Liao and Shimokawa test (\eqn{LS_n*}) applied to data without censoring.
-#' The formula used in below function is from ...
+#' Classic Liao and Shimokawa test (\eqn{LS_n^*}) which was modified by to usage for data with presence of
+#' censoring.
+#'
+#' @details
+#' The test can be applied for full samples as well because of a Kaplan-Meier
+#' estimator's universality. However, it can be lead too much simplification of algorithm to computing quantiles.
+#' Hence, in that case it is recommended use \code{\link{LS_test_full}}.
+#'
+#' @source N. Kim. “Goodness-of-fit tests for randomly censored Weibull distributions with estimated parameters”.
+#' Communications for Statistical Applications and Methods 24 (2017), pp. 519–531
 #'
 #' @param Y_vec_dt a data.table object, two-columns table which contains value of statistic \eqn{Y}
 #' and information of observation's censoring (1 - uncensored, 0 - censored).
 #' @param n integer, amount of observations in data
 #'
-#' @return numeric,a value of test statistic \eqn{LS_n*}
+#' @return numeric,a value of test statistic \eqn{LS_n^*}
 #'
 #' @import data.table
 #' @keywords internal

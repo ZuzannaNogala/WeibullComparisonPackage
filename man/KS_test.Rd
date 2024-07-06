@@ -3,6 +3,9 @@
 \name{KS_test}
 \alias{KS_test}
 \title{Computing value of Komogorov-Smirnov test (\eqn{KS_n^*}) for right-censored samples}
+\source{
+J.A. Koziol, S.B. Green. “A Cram ́er-von Mises statistic for randomly censored data”. Biometrika 63 (1976), pp. 465–474
+}
 \usage{
 KS_test(Y_vec_dt, n)
 }
@@ -13,11 +16,15 @@ and information of observation's censoring (1 - uncensored, 0 - censored).}
 \item{n}{integer, amount of observations in data}
 }
 \value{
-numeric,a value of test statistic \eqn{KS_n*}
+numeric,a value of test statistic \eqn{KS_n^*}
 }
 \description{
-Classic one-sample Kolmogorov-Smirnov test (\eqn{KS_n^*}) which was modified by ... to usage for data with
-presence of censoring. Because of the Kaplan-Meier estimator is standard nonparametric estimator of ...,
-The test can be use for full samples. However ... The formula used in below function is from ...
+Classic one-sample Kolmogorov-Smirnov test (\eqn{KS_n^*}) which was modified to usage for data with
+presence of censoring.
+}
+\details{
+The test can be applied for full samples as well because of a Kaplan-Meier
+estimator's universality. However, it can be lead too much simplification of algorithm to computing quantiles.
+Hence, in that case it is recommended use \code{\link{KS_test_full}}.
 }
 \keyword{internal}

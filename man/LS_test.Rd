@@ -2,7 +2,11 @@
 % Please edit documentation in R/statistictsUsedInComparison.R
 \name{LS_test}
 \alias{LS_test}
-\title{Computing value of Liao and Shimokawa test (\eqn{LS_n*}) for right-censored samples}
+\title{Computing value of Liao and Shimokawa test (\eqn{LS_n^*}) for right-censored samples}
+\source{
+N. Kim. “Goodness-of-fit tests for randomly censored Weibull distributions with estimated parameters”.
+Communications for Statistical Applications and Methods 24 (2017), pp. 519–531
+}
 \usage{
 LS_test(Y_vec_dt, n)
 }
@@ -13,10 +17,15 @@ and information of observation's censoring (1 - uncensored, 0 - censored).}
 \item{n}{integer, amount of observations in data}
 }
 \value{
-numeric,a value of test statistic \eqn{LS_n*}
+numeric,a value of test statistic \eqn{LS_n^*}
 }
 \description{
-Classic Liao and Shimokawa test (\eqn{LS_n*}) applied to data without censoring.
-The formula used in below function is from ...
+Classic Liao and Shimokawa test (\eqn{LS_n^*}) which was modified by to usage for data with presence of
+censoring.
+}
+\details{
+The test can be applied for full samples as well because of a Kaplan-Meier
+estimator's universality. However, it can be lead too much simplification of algorithm to computing quantiles.
+Hence, in that case it is recommended use \code{\link{LS_test_full}}.
 }
 \keyword{internal}
