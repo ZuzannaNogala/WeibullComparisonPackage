@@ -1,16 +1,3 @@
-#' Computing value of statistic \eqn{\Delta_k}
-#'
-#' Statistic represents the size of jump in \eqn{G_n(T_{(k)})} and can be described by a formula
-#' \deqn{\Delta_k = G_n(T_{(k)}) - \lim_{t \rightarrow T_{(k)}} G_n(t), \ k = 1, \ldots n} This difference can be simplified to
-#' calculable expression and the function \code{Delta_k} used it to computes value of statistic.
-#'
-#' @param k integer, k-th observation in sorted data
-#' @param n integer, amount of observations in data
-#' @param sort_Y_vec_dt data.table object, two-columns table which contains value of sorted statistic \eqn{Y}
-#' and information of observation's censoring (1 - uncensored, 0 - censored).
-#'
-#' @return numeric, a value of statistic \eqn{\Delta_k}
-#'
 #' @import data.table
 #'
 #' @keywords internal
@@ -22,8 +9,6 @@ Delta_k <- function(k, n, sort_Y_vec_dt){
 }
 
 #' Computing value of new statistics - \eqn{S_{n,a}^{(1)}} and \eqn{S_{n,a}^{(2)}}
-#'
-#'
 #'
 #' @param a numeric, the value of statistic's parameter
 #' @param n integer, number of observations in data
