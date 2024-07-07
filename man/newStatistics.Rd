@@ -4,13 +4,18 @@
 \alias{S_n_1}
 \alias{S_n_2}
 \title{Computing value of new statistics - \eqn{S_{n,a}^{(1)}} and \eqn{S_{n,a}^{(2)}}}
+\source{
+E. Bothma, J. S Allison, I. J. H Vigagie. “New classes of tests for the Weibull
+distribution using Stein’s method in the presence of random right censoring”.
+Computational Statistics 37 (2022), pp. 1751–1770
+}
 \usage{
 S_n_1(a, n, Y_vec_dt)
 
 S_n_2(a, n, Y_dt)
 }
 \arguments{
-\item{a}{numeric, the value of statistic's parameter}
+\item{a}{numeric, tuning parameter > 0}
 
 \item{n}{integer, number of observations in data}
 
@@ -18,9 +23,20 @@ S_n_2(a, n, Y_dt)
 information of observation's censoring}
 }
 \value{
-numeric, a value of test statistic \eqn{S_{n,a}^{(1)}} or \eqn{S_{n,a}^{(2)}}
+numeric, a value of test statistics \eqn{S_{n,a}^{(1)}} or \eqn{S_{n,a}^{(2)}}
 }
 \description{
-Computing value of new statistics - \eqn{S_{n,a}^{(1)}} and \eqn{S_{n,a}^{(2)}}
+The test statistic \eqn{S_{n,a}} is described by form:
+\deqn{S_{n,a} = n\int_{-\infty}^{\infty} \left \lvert \sum ^n_{j=1} \Delta_j
+\left[ite^{itY_j} + (1 - e^{Y_j})e^{itY_j}\right] \right \rvert ^2 w_a(t) \textrm{d}t,}
+where \eqn{w_a(t)} is a weight function which depends on a tuning parameter \eqn{a > 0}.
+If \eqn{w_a(t) = e^{-at^2}} the statistic simplifies to the form:
+\deqn{S_{n,a}^{(1)} = \sqrt{\frac{\pi}{a}}\sum^n_{j=1}\sum^n_{k=1}\Delta_j
+\Delta_k e^{\frac{-(Y_j-Y_k)^2}{4a}}\Bigl(-\frac{1}{4a^2} \left((Y_j-Y_k)^2
+- 2a \right) + \frac{1 - e^{Y_j}}{a}(Y_j - Y_k) + (1 - e^{Y_j})(1 - e^{Y_k}) \Bigr)}
+If \eqn{w_a(t) = e^{-a|t|}}: \deqn{S_{n,a}^{(2)} = n \sum^n_{j=1}\sum^n_{k=1}\Delta_j
+\Delta_k \Bigl( \frac{-4a(3(Y_j - Y_k)^2) - a^2)}{((Y_j - Y_k)^2) + a^2)^3} +
+\frac{8a(Y_j - Y_k)(1 - e^{Y_j})}{((Y_j - Y_k)^2) + a^2)^2} +
+\frac{2a(1 - e^{Y_j})(1 - e^{Y_k})}{(Y_j - Y_k)^2) + a^2}\Bigr).}
 }
 \keyword{internal}
