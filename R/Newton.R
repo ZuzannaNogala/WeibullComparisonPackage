@@ -3,8 +3,8 @@ globalVariables(c("T_vals"))
 #'
 #' @param theta_before_k (k-1)-th estimatation of parameter theta (shape parameter)
 #' @param lambda_before_k (k-1)-th estimatation of parameter theta (scale parameter)
-#' @param Hess_before_k ..
-#' @param grad_before_k ..
+#' @param Hess_before_k a value of Hessian of function \eqn{l(\theta, \lambda)} (more in \code{\link{derivatives}}) in point (\code{theta_before_k}, \code{lambda_before_k})
+#' @param grad_before_k a value of gradient  of function \eqn{l(\theta, \lambda)} in point (\code{theta_before_k}, \code{lambda_before_k})
 #'
 #' @keywords internal
 Newton_k_step <- function(theta_before_k, lambda_before_k, Hess_before_k, grad_before_k){
@@ -12,7 +12,7 @@ Newton_k_step <- function(theta_before_k, lambda_before_k, Hess_before_k, grad_b
   x_before_k - as.vector(solve(Hess_before_k) %*% grad_before_k)
 }
 
-#' Starting Points - theta
+#' Starting points of Newton-Raphson Algorithm (censured case) - parameter \eqn{\theta}
 #'
 #' @param n integer, number of observations in data
 #' @param T_vals vector of observations
@@ -22,7 +22,7 @@ theta_hat_approx <- function(n, T_vals){
   function(x) n / x + sum(log(T_vals)) - (n / sum(T_vals ^ x)) * sum(log(T_vals) * (T_vals) ^ x)
 }
 
-#' Starting Points - theta, full sample
+#' Starting points of Newton-Raphson Algorithm (full sample case) - parameter \eqn{\theta}
 #'
 #' @param n integer, number of observations in data
 #' @param T_vals vector of observations
@@ -34,11 +34,11 @@ mle_theta_full_sample<- function(n, T_vals) {
 }
 
 
-#' Starting Points - lambda, full sample
+#' Starting points of Newton-Raphson Algorithm (full sample case) - parameter \eqn{\lambda}
 #'
 #' @param n integer, number of observations in data
 #' @param T_vals vector of observations
-#' @param theta_hat_est estimation of parametr theta (shape parametr); result of
+#' @param theta_hat_est estimation of parameter \eqn{\theta} (shape parametr); result of
 #' function \code{\link{mle_theta_full_sample}}
 #'
 #' @keywords internal
@@ -58,10 +58,10 @@ mle_lambda_full_sample <- function(n, T_vals, theta_hat_est = mle_theta_full_sam
 #' where \eqn{\delta_i} ...
 #' The starting points of algorithm are solution of ...
 #'
-#' @param T_dt data table with one column with values of observation, second one contains information if the observation
+#' @param T_dt data table with two columns. First one contains values of observation and second one - information if the observation
 #' is censured or not
 #'
-#' @return a list which contains estimation of theta and lambda parameters
+#' @return a list which contains estimation of \eqn{\theta} and \eqn{\lambda} parameters
 #'
 #' @import data.table
 #' @importFrom stats rweibull runif

@@ -2,7 +2,7 @@
 % Please edit documentation in R/Newton.R
 \name{mle_lambda_full_sample}
 \alias{mle_lambda_full_sample}
-\title{Starting Points - lambda, full sample}
+\title{Starting points of Newton-Raphson Algorithm (full sample case) - parameter \eqn{\lambda}}
 \usage{
 mle_lambda_full_sample(
   n,
@@ -15,10 +15,10 @@ mle_lambda_full_sample(
 
 \item{T_vals}{vector of observations}
 
-\item{theta_hat_est}{estimation of parametr theta (shape parametr); result of
+\item{theta_hat_est}{estimation of parameter \eqn{\theta} (shape parametr); result of
 function \code{\link{mle_theta_full_sample}}}
 }
 \description{
-Starting Points - lambda, full sample
+Starting points of Newton-Raphson Algorithm (full sample case) - parameter \eqn{\lambda}
 }
 \keyword{internal}

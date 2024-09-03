@@ -7,11 +7,11 @@
 Newton_result(T_dt)
 }
 \arguments{
-\item{T_dt}{data table with one column with values of observation, second one contains information if the observation
+\item{T_dt}{data table with two columns. First one contains values of observation and second one - information if the observation
 is censured or not}
 }
 \value{
-a list which contains estimation of theta and lambda parameters
+a list which contains estimation of \eqn{\theta} and \eqn{\lambda} parameters
 }
 \description{
 Newton-Raphson algorithm is numerical method applied to find estimation of roots of function. In this case method was used

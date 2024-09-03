@@ -2,7 +2,7 @@
 % Please edit documentation in R/Newton.R
 \name{mle_theta_full_sample}
 \alias{mle_theta_full_sample}
-\title{Starting Points - theta, full sample}
+\title{Starting points of Newton-Raphson Algorithm (full sample case) - parameter \eqn{\theta}}
 \usage{
 mle_theta_full_sample(n, T_vals)
 }
@@ -12,6 +12,6 @@ mle_theta_full_sample(n, T_vals)
 \item{T_vals}{vector of observations}
 }
 \description{
-Starting Points - theta, full sample
+Starting points of Newton-Raphson Algorithm (full sample case) - parameter \eqn{\theta}
 }
 \keyword{internal}

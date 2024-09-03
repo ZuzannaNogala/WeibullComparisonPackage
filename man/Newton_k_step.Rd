@@ -11,9 +11,9 @@ Newton_k_step(theta_before_k, lambda_before_k, Hess_before_k, grad_before_k)
 
 \item{lambda_before_k}{(k-1)-th estimatation of parameter theta (scale parameter)}
 
-\item{Hess_before_k}{..}
+\item{Hess_before_k}{a value of Hessian of function \eqn{l(\theta, \lambda)} (more in \code{\link{derivatives}}) in point (\code{theta_before_k}, \code{lambda_before_k})}
 
-\item{grad_before_k}{..}
+\item{grad_before_k}{a value of gradient  of function \eqn{l(\theta, \lambda)} in point (\code{theta_before_k}, \code{lambda_before_k})}
 }
 \description{
 Newton-Raphson Algorithm - k-th step of algorithm

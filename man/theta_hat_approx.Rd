@@ -2,7 +2,7 @@
 % Please edit documentation in R/Newton.R
 \name{theta_hat_approx}
 \alias{theta_hat_approx}
-\title{Starting Points - theta}
+\title{Starting points of Newton-Raphson Algorithm (censured case) - parameter \eqn{\theta}}
 \usage{
 theta_hat_approx(n, T_vals)
 }
@@ -12,6 +12,6 @@ theta_hat_approx(n, T_vals)
 \item{T_vals}{vector of observations}
 }
 \description{
-Starting Points - theta
+Starting points of Newton-Raphson Algorithm (censured case) - parameter \eqn{\theta}
 }
 \keyword{internal}
